@@ -1,7 +1,16 @@
-import Head from "next/head";
-import Image from "next/image";
-import styles from "@/styles/Home.module.css";
+import { BuyMeCoffee, Cover, Section, SocialNetworks, Title } from "@/components";
 
 export default function Home() {
-  return <><Cover/></>;
+  return (
+    <div>
+      <Section>
+        <Cover title="Liia<br /> Zubova" />
+        <SocialNetworks />
+        <BuyMeCoffee />
+      </Section>
+      <Section>
+        <Title>New Post</Title>
+      </Section>
+    </div>
+  );
 }
