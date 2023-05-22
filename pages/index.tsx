@@ -1,14 +1,22 @@
+import React, { useState } from "react";
 import {
   BuyMeCoffee,
   Cover,
+  Post,
+  PostGrid,
   Section,
   SocialNetworks,
   Title,
 } from "@/components";
 
+import { loadPosts } from "./api/posts";
+
 const LOAD_MORE_STEP = 4;
 
-export default function Home({ posts }) {
+export default function Home(initialPosts: any, total: any) {
+
+  const [posts, setPosts] = useState(initialPosts);
+  console.log("hello world");
   return (
     <div>
       <Section>
@@ -18,15 +26,25 @@ export default function Home({ posts }) {
       </Section>
       <Section>
         <Title>New Post</Title>
+        <PostGrid>
+          {/* {posts.map((post: any)=>(
+            <Post key={post.slug.current} {...post} />
+          ))} */}
+        </PostGrid>
+
       </Section>
     </div>
   );
+
 }
 
 export const getServerSideProps = async () => {
-  const { posts, total } = await loadData(0, LOAD_MORE_STEP);
-};
+  const { posts, total } = await loadPosts(0, LOAD_MORE_STEP);
 
-async function loadData(start, end) {
-  const query=``;
-}
+  return {
+    props: {
+      initialPosts: posts,
+      total,
+    },
+  };
+};

@@ -8,8 +8,8 @@ export const clientConfig = {
 };
 
 export const client = SanityClient({
-  projectId: "your-project-id",
-  dataset: "your-dataset-name",
+  projectId: clientConfig.projectId,
+  dataset: clientConfig.dataset,
   useCdn: true,
   apiVersion: "2023-05-22",
   token: process.env.NEXT_PUBLIC_SANITY_TOKEN,
