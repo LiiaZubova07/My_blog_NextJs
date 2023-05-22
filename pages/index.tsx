@@ -1,6 +1,14 @@
-import { BuyMeCoffee, Cover, Section, SocialNetworks, Title } from "@/components";
+import {
+  BuyMeCoffee,
+  Cover,
+  Section,
+  SocialNetworks,
+  Title,
+} from "@/components";
 
-export default function Home() {
+const LOAD_MORE_STEP = 4;
+
+export default function Home({ posts }) {
   return (
     <div>
       <Section>
@@ -13,4 +21,12 @@ export default function Home() {
       </Section>
     </div>
   );
+}
+
+export const getServerSideProps = async () => {
+  const { posts, total } = await loadData(0, LOAD_MORE_STEP);
+};
+
+async function loadData(start, end) {
+  const query=``;
 }

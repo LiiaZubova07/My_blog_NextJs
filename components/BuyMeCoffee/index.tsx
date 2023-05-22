@@ -5,7 +5,7 @@ import ScreenEgg from "../ScreenEgg";
 
 const BuyMeCoffee = ({ className }: any) => {
   return (
-    <ScreenEgg type="right">
+    <ScreenEgg type="right"yarn de>
       <div className={cl(styles.buyCoffee, className)}>
         <a
           href="https://buy.stripe.com/5kA7sL9574SG7xCfZ3"
