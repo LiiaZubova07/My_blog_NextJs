@@ -1,13 +1,25 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { client } from "@/lib/client";
 
-export default function posts({ req, res }: any) {
-  res.status(200).json({ name: "John Doe" });
+export default async function posts({ req, res }: any) {
+  const { start, end } = req.query;
+  if (isNaN(Number(start)) || isNaN(Number(end))) {
+    return res.status(400).json({
+      error:'Data invalid'
+    });
+  }
+
+  const { posts, total } = await loadPosts(start, end);
+
+  res.status(200).json({
+    posts,
+    total,
+  });
 }
 
 export async function loadPosts(start: number, end: number) {
   const query = `{
-    "posts": *[_type == "post"] | order(publishedDate desc) | {_id, publishedDate, title, slug, description, image},
+    "posts": *[_type == "post"] | order(publishedDate desc) [${start}...${end}] {_id, publishedDate, title, slug, description, image},
     "total": count(*[_type == "post"])
   }`;
   const { posts, total } = await client.fetch(query);
