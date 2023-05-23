@@ -5,7 +5,7 @@ export default async function posts({ req, res }: any) {
   const { start, end } = req.query;
   if (isNaN(Number(start)) || isNaN(Number(end))) {
     return res.status(400).json({
-      error:'Data invalid'
+      error: "Data invalid"
     });
   }
 

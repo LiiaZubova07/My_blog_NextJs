@@ -25,15 +25,14 @@ export default function Home(initialPosts: any, total: any) {
     setLoading(true);
     try {
       const data = await fetch(
-
         `/api/posts?start=${loadedAmount}&end=${loadedAmount + LOAD_MORE_STEP}`
       ).then((response) => response.json());
 
       setLoadedAmount(loadedAmount + LOAD_MORE_STEP);
-setPosts([...posts, ...data.posts])
+      setPosts([...posts, ...data.posts]);
       setLoading(false);
-
     } catch (error) {
+      console.log(error);
       setLoading(false);
     }
   };
@@ -52,8 +51,14 @@ setPosts([...posts, ...data.posts])
             <Post key={post.slug.current} {...post} />
           ))}
         </PostGrid>
+
         {isLoadButton && (
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             <Button onClick={getMorePosts} disabled={loading}>
               Load more posts...
             </Button>
